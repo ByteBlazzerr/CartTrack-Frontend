@@ -32,7 +32,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'https://carttrack-backend.onrender.com',
+        target: 'https://carttrack-backend-1.onrender.com',
         changeOrigin: true,
         secure: false
       }
