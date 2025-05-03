@@ -5,20 +5,23 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 // Define the async thunk for fetching user data
 export const fetchProductssData = createAsyncThunk('product/fetchProductssData', async () => {
   let myHeaders = new Headers();
-    let requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow'
-    };
-    const response = await fetch('/api/products',requestOptions);
-    const jsonData = await response.json();
-    // console.log(jsonData);
-    if (jsonData.message) {
-      // handle error and return empty array
-      console.log(jsonData.message);
-      return []
-    }
-    return jsonData;
+  myHeaders.append('Content-Type', 'application/json');
+  
+  let requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    credentials: 'include',
+    redirect: 'follow'
+  };
+
+  const response = await fetch('https://carttrack-backend-1.onrender.com/api/products', requestOptions);
+  const jsonData = await response.json();
+  
+  if (jsonData.message) {
+    console.log(jsonData.message);
+    return []
+  }
+  return jsonData;
 });
 
 const initialState = {
